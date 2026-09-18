@@ -11,6 +11,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Montserrat:wght@300;400;500;600;700&display=swap');
+
     /* ── RESET & VARIABLES ─────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
@@ -49,6 +51,14 @@
       inset: 0;
       pointer-events: none;
       z-index: 1;
+    }
+
+    /* ── RAIN CANVAS ─────────────────────────────────── */
+    #rainCanvas {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 50;
     }
 
     /* ── MUSIC BUTTON ────────────────────────────────── */
@@ -697,6 +707,124 @@
       font-size: 10px; color: rgba(247,237,213,.4);
       letter-spacing: 1px;
     }
+
+    /* ── ALTAR ASAMIMI (sección ubicación) ──────────── */
+    .asa-altar-wrap {
+      max-width: 420px;
+      width: 100%;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .asa-altar-wrap img {
+      width: 100%;
+      border-radius: 20px;
+      box-shadow: 0 8px 40px rgba(201,168,76,.22), 0 2px 12px rgba(44,24,16,.10);
+      border: 3px solid var(--gold-pale);
+      display: block;
+    }
+    .asa-altar-caption {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: .85rem;
+      color: var(--text-soft);
+      margin-top: 12px;
+      letter-spacing: .4px;
+      line-height: 1.55;
+    }
+
+    /* ════════════════════════════════════════════════════
+       SECCIÓN B — GALERÍA DE PAREJAS
+    ════════════════════════════════════════════════════ */
+    #galeria {
+      background: linear-gradient(180deg, #FEF9F0 0%, #F5EDFF 100%);
+    }
+    .gallery-grid {
+      display: flex;
+      gap: 20px;
+      max-width: 960px;
+      width: 100%;
+      align-items: stretch;
+    }
+    .gallery-grid img {
+      flex: 1;
+      width: 0;
+      height: 300px;
+      object-fit: cover;
+      border-radius: 14px;
+      box-shadow: var(--shadow);
+      border: 2px solid var(--gold-pale);
+      transition: transform .35s;
+    }
+    .gallery-grid img:hover { transform: scale(1.025); }
+
+    @media (max-width: 760px) {
+      .gallery-grid { flex-direction: column; }
+      .gallery-grid img { width: 100%; height: 240px; flex: none; }
+    }
+
+    /* ════════════════════════════════════════════════════
+       SECCIÓN — MESA DE REGALOS
+    ════════════════════════════════════════════════════ */
+    #regalos { background: var(--white); }
+
+    .regalos-card {
+      max-width: 600px;
+      width: 100%;
+      border-left: 4px solid var(--gold);
+      border-radius: 8px;
+      padding: 40px;
+      background: #fff;
+      box-shadow: var(--shadow);
+    }
+    .regalos-icon { font-size: 40px; text-align: center; margin-bottom: 16px; }
+    .regalos-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      color: var(--text-dark);
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .regalos-intro {
+      font-size: .92rem;
+      color: var(--text-mid);
+      text-align: center;
+      line-height: 1.8;
+      margin-bottom: 28px;
+    }
+    .regalos-datos {
+      background: var(--gold-pale);
+      border-radius: 8px;
+      padding: 24px;
+      margin-bottom: 20px;
+    }
+    .regalos-datos h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      color: var(--text-dark);
+      margin-bottom: 14px;
+    }
+    .dato-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 10px;
+      font-size: .87rem;
+      color: var(--text-mid);
+      line-height: 1.55;
+    }
+    .dato-item .check { color: #7AB87A; font-size: 15px; flex-shrink: 0; margin-top: 1px; }
+    .dato-item strong { color: var(--text-dark); }
+    .regalos-closing {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: .9rem;
+      color: var(--text-soft);
+      text-align: center;
+      line-height: 1.7;
+    }
+    @media (max-width: 600px) {
+      .regalos-card { padding: 28px 20px; }
+    }
   </style>
 </head>
 <body>
@@ -722,6 +850,9 @@
 <!-- ═══════════════════ CANVAS PETALS ═══════════════════ -->
 <canvas id="petalsCanvas"></canvas>
 
+<!-- ═══════════════════ CANVAS LLUVIA ASAMIMI ══════════ -->
+<canvas id="rainCanvas"></canvas>
+
 <!-- ═══════════════════ AUDIO ═══════════════════════════ -->
 <audio id="bgMusic" loop preload="auto">
   <source src="assets/audio/cancion_fondo.mp3" type="audio/mpeg">
@@ -733,8 +864,10 @@
 <!-- ═══════════════════ NAV DOTS ════════════════════════ -->
 <nav class="nav-dots" aria-label="Secciones">
   <a href="#hero"       class="nav-dot active" title="Inicio"></a>
+  <a href="#galeria"    class="nav-dot"         title="Galería"></a>
   <a href="#itinerario" class="nav-dot"         title="Itinerario"></a>
   <a href="#ubicacion"  class="nav-dot"         title="Ubicación"></a>
+  <a href="#regalos"    class="nav-dot"         title="Mesa de Regalos"></a>
   <a href="#rsvp"       class="nav-dot"         title="Confirmación"></a>
 </nav>
 
@@ -829,15 +962,31 @@
     </div>
   </div>
 
-  <!-- Asamimi waving (hero, bottom-right) -->
-  <div class="asa-hero fi d6">
-    <img src="assets/images/Asamimi_1.jpg" alt="Asamimi saludando" loading="eager">
-  </div>
-
   <!-- Scroll hint -->
   <div class="scroll-hint fi d6" aria-hidden="true">
     <span></span><span></span><span></span>
   </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════
+     SECCIÓN B — GALERÍA DE PAREJAS
+══════════════════════════════════════════════════════ -->
+<section id="galeria" class="section">
+
+  <p class="s-label fi">Un momento entre nosotros</p>
+  <h2 class="s-title fi d1">¡1, 2, 3... Sonríe!</h2>
+
+  <div class="divider fi d2">
+    <span class="divider-inner">❧ &nbsp; ✦ &nbsp; ❧</span>
+  </div>
+
+  <div class="gallery-grid fi d3">
+    <img src="assets/images/pareja5.jpg"        alt="Alejandra y Christian" loading="lazy">
+    <img src="assets/images/Asamimi_selfie.jpeg" alt="Selfie con Asamimi"   loading="lazy">
+    <img src="assets/images/pareja4.jpg"        alt="Alejandra y Christian" loading="lazy">
+  </div>
+
 </section>
 
 
@@ -866,56 +1015,100 @@
       <div class="tl-card empty tl-empty"></div>
     </div>
 
-    <!-- 3:00 PM — Ceremonia -->
+    <!-- 2:00–3:30 PM — Ceremonia -->
     <div class="tl-row fi d3">
       <div class="tl-card empty tl-empty"></div>
       <div class="tl-dot">⛪</div>
       <div class="tl-card right">
-        <p class="tl-time">3:00 PM</p>
-        <p class="tl-event">Ceremonia Religiosa</p>
+        <p class="tl-time">2:00 – 3:30 PM</p>
+        <p class="tl-event">Boda / Ceremonia Religiosa</p>
         <p class="tl-desc">Sacramento del Santo Matrimonio</p>
       </div>
     </div>
 
-    <!-- 4:30 PM — Banquete -->
+    <!-- 3:30–4:00 PM — Fotos -->
     <div class="tl-row fi d2">
       <div class="tl-card left">
-        <p class="tl-time">4:30 PM</p>
+        <p class="tl-time">3:30 – 4:00 PM</p>
+        <p class="tl-event">Acomodo y Fotos</p>
+        <p class="tl-desc">Acomodo en el salón y fotos con invitados</p>
+      </div>
+      <div class="tl-dot">📸</div>
+      <div class="tl-card empty tl-empty"></div>
+    </div>
+
+    <!-- 4:00–5:00 PM — Banquete -->
+    <div class="tl-row fi d3">
+      <div class="tl-card empty tl-empty"></div>
+      <div class="tl-dot">🍽️</div>
+      <div class="tl-card right">
+        <p class="tl-time">4:00 – 5:00 PM</p>
         <p class="tl-event">Banquete</p>
         <p class="tl-desc">Comida con familia y amigos</p>
       </div>
-      <div class="tl-dot">🍽️</div>
-      <div class="tl-card empty tl-empty"></div>
     </div>
 
-    <!-- 6:00 PM — Brindis -->
-    <div class="tl-row fi d3">
-      <div class="tl-card empty tl-empty"></div>
-      <div class="tl-dot">✨</div>
-      <div class="tl-card right">
-        <p class="tl-time">6:00 PM</p>
-        <p class="tl-event">Brindis de Honor</p>
-        <p class="tl-desc">Por los novios y por el amor eterno</p>
-      </div>
-    </div>
-
-    <!-- 7:00 PM — Baile -->
+    <!-- 5:30 PM — Palabras de familiares -->
     <div class="tl-row fi d2">
       <div class="tl-card left">
-        <p class="tl-time">7:00 PM</p>
-        <p class="tl-event">¡A Bailar!</p>
-        <p class="tl-desc">Apertura de pista · Baile · ¡Fiesta y celebración!</p>
+        <p class="tl-time">5:30 PM</p>
+        <p class="tl-event">Palabras de Familiares</p>
+        <p class="tl-desc">Un momento especial con nuestros seres queridos</p>
       </div>
-      <div class="tl-dot">💃</div>
+      <div class="tl-dot">🎙️</div>
+      <div class="tl-card empty tl-empty"></div>
+    </div>
+
+    <!-- 5:30–7:00 PM — Juegos -->
+    <div class="tl-row fi d3">
+      <div class="tl-card empty tl-empty"></div>
+      <div class="tl-dot">🎯</div>
+      <div class="tl-card right">
+        <p class="tl-time">5:30 – 7:00 PM</p>
+        <p class="tl-event">Juegos y Actividades</p>
+        <p class="tl-desc">¡Diversión para todos los invitados!</p>
+      </div>
+    </div>
+
+    <!-- 7:00–7:15 PM — Pastel -->
+    <div class="tl-row fi d2">
+      <div class="tl-card left">
+        <p class="tl-time">7:00 – 7:15 PM</p>
+        <p class="tl-event">Pastel y Mesa de Dulces</p>
+        <p class="tl-desc">El momento más dulce de la noche</p>
+      </div>
+      <div class="tl-dot">🎂</div>
+      <div class="tl-card empty tl-empty"></div>
+    </div>
+
+    <!-- 7:15–8:00 PM — Batucada -->
+    <div class="tl-row fi d3">
+      <div class="tl-card empty tl-empty"></div>
+      <div class="tl-dot">🥁</div>
+      <div class="tl-card right">
+        <p class="tl-time">7:15 – 8:00 PM</p>
+        <p class="tl-event">Batucada y Cierre</p>
+        <p class="tl-desc">¡El gran final con ritmo y emoción!</p>
+      </div>
+    </div>
+
+    <!-- 8:00–8:30 PM — Salida -->
+    <div class="tl-row fi d2">
+      <div class="tl-card left">
+        <p class="tl-time">8:00 – 8:30 PM</p>
+        <p class="tl-event">Salida del Salón</p>
+        <p class="tl-desc">Despedida y cierre de nuestra celebración</p>
+      </div>
+      <div class="tl-dot">✨</div>
       <div class="tl-card empty tl-empty"></div>
     </div>
 
   </div><!-- /.tl-wrap -->
 
-  <!-- Asamimi dancing -->
+  <!-- Asamimi fiesta -->
   <div class="asa-dance fi d4">
-    <img src="assets/images/Asamimi_2.jpg" alt="Asamimi bailando">
-    <p>¡Vamos a bailar! 🎉</p>
+    <img src="assets/images/Asamimi_fiesta.jpg" alt="Asamimi en la fiesta">
+    <p>¡Vamos a celebrar! 🎉</p>
   </div>
 
 </section>
@@ -952,6 +1145,11 @@
       loading="lazy"
       referrerpolicy="no-referrer-when-downgrade">
     </iframe>
+  </div>
+
+  <!-- Asamimi en el lugar -->
+  <div class="asa-altar-wrap fi d3">
+    <img src="assets/images/Asamimi_altar.jpeg" alt="Asamimi en el lugar de la boda" loading="lazy">
   </div>
 
   <!-- How to get there -->
@@ -1009,6 +1207,52 @@
 
 
 <!-- ══════════════════════════════════════════════════════
+     SECCIÓN — MESA DE REGALOS
+══════════════════════════════════════════════════════ -->
+<section id="regalos" class="section">
+
+  <p class="s-label fi">Con cariño y gratitud</p>
+  <h2 class="s-title fi d1">Mesa de Regalos</h2>
+
+  <div class="divider fi d2">
+    <span class="divider-inner">🎁 &nbsp; ✦ &nbsp; 🎁</span>
+  </div>
+
+  <div class="regalos-card fi d3">
+    <div class="regalos-icon">🎁</div>
+    <h3 class="regalos-title">Mesa de Regalos</h3>
+
+    <p class="regalos-intro">
+      Tu presencia en este día tan especial es lo más importante para nosotros.<br><br>
+      Si deseas acompañarnos en este nuevo capítulo de nuestras vidas con un regalo,
+      estaremos eternamente agradecidos.
+    </p>
+
+    <div class="regalos-datos">
+      <h4>Datos bancarios</h4>
+      <div class="dato-item">
+        <span class="check">✔</span>
+        <span><strong>CLABE:</strong> 722969010753115020</span>
+      </div>
+      <div class="dato-item">
+        <span class="check">✔</span>
+        <span><strong>Beneficiario:</strong> Christian David Gómez Galicia</span>
+      </div>
+      <div class="dato-item">
+        <span class="check">✔</span>
+        <span><strong>Institución:</strong> Mercado Pago</span>
+      </div>
+    </div>
+
+    <p class="regalos-closing">
+      Cualquier detalle será recibido con mucho cariño y gratitud. 💛
+    </p>
+  </div>
+
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════
      SECTION 4 — RSVP / CONFIRMACIÓN
 ══════════════════════════════════════════════════════ -->
 <section id="rsvp" class="section">
@@ -1038,7 +1282,7 @@
   <!-- WhatsApp CTA -->
   <div class="fi d5">
     <a
-      href="https://wa.me/521XXXXXXXXXX?text=%C2%A1Hola!%20Confirmo%20mi%20asistencia%20a%20la%20boda%20de%20Alejandra%20y%20Christian%20el%2018%20de%20diciembre%20de%202026%20%F0%9F%8E%8A"
+      href="https://wa.me/5215519505027?text=%C2%A1Hola!%20Confirmo%20mi%20asistencia%20a%20la%20boda%20de%20Alejandra%20y%20Christian%20el%2018%20de%20diciembre%20de%202026%20%F0%9F%8E%8A"
       class="wa-btn"
       target="_blank"
       rel="noopener noreferrer"
@@ -1057,10 +1301,6 @@
     <p>¡Te esperamos con cariño! 💕</p>
   </div>
 
-  <!-- Pareja 3 decoration -->
-  <div class="deco-photo fi d6">
-    <img src="assets/images/pareja3.png" alt="Los novios">
-  </div>
 
 </section>
 
@@ -1232,7 +1472,79 @@
 })();
 
 
-/* ─── 5. NAV DOTS ACTIVE STATE ──────────────────────────── */
+/* ─── 5. ASAMIMI RAIN BORDER EFFECT ─────────────────────── */
+(function () {
+  const canvas = document.getElementById('rainCanvas');
+  const ctx    = canvas.getContext('2d');
+  let   loopStarted = false;
+
+  function resize() {
+    canvas.width  = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  const BORDER = 160;
+  const COUNT  = window.innerWidth < 600 ? 22 : 39;
+
+  function makeDrop(randomY) {
+    const left = Math.random() < 0.5;
+    const w    = canvas.width || window.innerWidth;
+    const h    = canvas.height || window.innerHeight;
+    return {
+      x:     left ? Math.random() * BORDER : w - Math.random() * BORDER,
+      y:     randomY ? Math.random() * h : -60,
+      size:  Math.random() * 42 + 30,
+      vy:    Math.random() * 2 + 1.2,
+      vx:    (Math.random() - 0.5) * 0.5,
+      alpha: Math.random() * 0.5 + 0.3,
+      rot:   (Math.random() - 0.5) * 0.4,
+    };
+  }
+
+  const drops = Array.from({ length: COUNT }, () => makeDrop(true));
+
+  const img = new Image();
+
+  function startLoop() {
+    if (loopStarted) return;
+    loopStarted = true;
+    (function tick() {
+      const w = canvas.width;
+      const h = canvas.height;
+      ctx.clearRect(0, 0, w, h);
+      drops.forEach(function (d) {
+        d.y += d.vy;
+        d.x += d.vx;
+        if (d.y > h + 70) {
+          const nd = makeDrop(false);
+          Object.assign(d, nd);
+        }
+        ctx.save();
+        ctx.globalAlpha = d.alpha;
+        ctx.translate(d.x, d.y);
+        ctx.rotate(d.rot);
+        ctx.beginPath();
+        ctx.arc(0, 0, d.size / 2, 0, Math.PI * 2);
+        ctx.closePath();
+        ctx.clip();
+        ctx.drawImage(img, -d.size / 2, -d.size / 2, d.size, d.size);
+        ctx.restore();
+      });
+      requestAnimationFrame(tick);
+    })();
+  }
+
+  img.onload = startLoop;
+  img.onerror = function () { console.warn('asamimi_lluvia.jpg no cargó'); };
+  img.src = 'assets/images/asamimi_lluvia.jpg';
+
+  if (img.complete && img.naturalWidth) startLoop();
+})();
+
+
+/* ─── 6. NAV DOTS ACTIVE STATE ──────────────────────────── */
 (function () {
   const dots     = document.querySelectorAll('.nav-dot');
   const sections = document.querySelectorAll('section[id]');
