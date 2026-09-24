@@ -825,6 +825,327 @@
     @media (max-width: 600px) {
       .regalos-card { padding: 28px 20px; }
     }
+
+    /* RSVP Section */
+    .rsvp-section {
+      padding: 60px 20px;
+      background: linear-gradient(135deg, rgba(201, 168, 76, 0.05) 0%, rgba(156, 137, 184, 0.05) 100%);
+      text-align: center;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .rsvp-container {
+      max-width: 500px;
+      margin: 0 auto;
+      perspective: 1000px;
+    }
+
+    .rsvp-pantalla {
+      opacity: 0;
+      transform: translateX(100%);
+      transition: all 0.5s ease-in-out;
+      pointer-events: none;
+    }
+
+    .rsvp-pantalla.activa {
+      opacity: 1;
+      transform: translateX(0);
+      pointer-events: auto;
+    }
+
+    .rsvp-titulo {
+      font-family: 'Dancing Script', cursive;
+      font-size: 2.5rem;
+      color: #2C1810;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+
+    .rsvp-subtitulo {
+      font-size: 1rem;
+      color: #666;
+      margin-bottom: 30px;
+      font-weight: 300;
+    }
+
+    /* Deadline Box */
+    .deadline-box {
+      background: #FFF3E0;
+      border-left: 4px solid #F0A8C0;
+      padding: 15px 20px;
+      border-radius: 6px;
+      margin-bottom: 30px;
+    }
+
+    .countdown {
+      font-size: 0.95rem;
+      color: #C9A84C;
+      font-weight: bold;
+      margin: 0;
+    }
+
+    .countdown.urgente {
+      color: #D32F2F;
+      animation: pulse 1s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.7; }
+    }
+
+    /* Input */
+    .input-group {
+      margin-bottom: 20px;
+    }
+
+    .codigo-input {
+      width: 100%;
+      padding: 15px 20px;
+      font-size: 1.2rem;
+      border: 2px solid #DDD;
+      border-radius: 8px;
+      text-transform: uppercase;
+      text-align: center;
+      letter-spacing: 2px;
+      font-family: 'Courier New', monospace;
+      transition: all 0.3s ease;
+    }
+
+    .codigo-input:focus {
+      outline: none;
+      border-color: #C9A84C;
+      box-shadow: 0 0 10px rgba(201, 168, 76, 0.3);
+    }
+
+    /* Botones */
+    .rsvp-btn {
+      width: 100%;
+      padding: 15px 30px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      font-family: 'Montserrat', sans-serif;
+      margin: 10px 0;
+    }
+
+    .btn-primario {
+      background: linear-gradient(135deg, #C9A84C 0%, #9C89B8 100%);
+      color: white;
+    }
+
+    .btn-primario:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(201, 168, 76, 0.4);
+    }
+
+    .btn-primario:disabled {
+      background: #CCC;
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+
+    .btn-secundario {
+      background: white;
+      color: #C9A84C;
+      border: 2px solid #C9A84C;
+    }
+
+    .btn-secundario:hover {
+      background: #F9F5F0;
+      transform: translateY(-2px);
+    }
+
+    /* Cantidad */
+    .cantidad-display {
+      background: white;
+      border: 2px solid #C9A84C;
+      border-radius: 12px;
+      padding: 30px;
+      margin: 30px 0;
+      font-size: 3rem;
+      font-weight: bold;
+      color: #C9A84C;
+    }
+
+    .cantidad-display small {
+      display: block;
+      font-size: 0.8rem;
+      color: #666;
+      font-weight: normal;
+      margin-top: 10px;
+    }
+
+    .cantidad-controles {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin: 30px 0;
+      align-items: center;
+    }
+
+    .btn-cantidad {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      font-size: 2rem;
+      border: 2px solid #C9A84C;
+      background: white;
+      color: #C9A84C;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: bold;
+    }
+
+    .btn-cantidad:hover:not(:disabled) {
+      background: #C9A84C;
+      color: white;
+      transform: scale(1.1);
+    }
+
+    .btn-cantidad:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+
+    .cantidad-box {
+      min-width: 80px;
+      text-align: center;
+    }
+
+    .cantidad-info {
+      font-size: 0.9rem;
+      color: #666;
+      margin: 15px 0;
+    }
+
+    /* Botones grupo */
+    .botones-grupo {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 30px;
+    }
+
+    /* Errores */
+    .error-box {
+      background: #FFEBEE;
+      border-left: 4px solid #D32F2F;
+      color: #C62828;
+      padding: 15px 20px;
+      border-radius: 6px;
+      margin: 20px 0;
+      font-size: 0.95rem;
+      animation: slideDown 0.3s ease;
+    }
+
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Loading */
+    .loading {
+      padding: 20px;
+      text-align: center;
+    }
+
+    .loading p {
+      color: #C9A84C;
+      font-weight: bold;
+    }
+
+    /* Info */
+    .rsvp-info {
+      font-size: 0.85rem;
+      color: #999;
+      margin-top: 20px;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .rsvp-titulo { font-size: 2rem; }
+      .cantidad-display { font-size: 2.5rem; padding: 20px; }
+      .btn-cantidad { width: 50px; height: 50px; font-size: 1.5rem; }
+      .rsvp-btn { padding: 12px 20px; font-size: 0.9rem; }
+    }
+
+    /* Barra de progreso */
+    .barra-progreso {
+      width: 100%;
+      margin-top: 20px;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .barra-progreso-contenedor {
+      width: 100%;
+      height: 6px;
+      background: #F0F0F0;
+      border-radius: 3px;
+      overflow: hidden;
+      margin-bottom: 10px;
+    }
+
+    .barra-relleno {
+      height: 100%;
+      background: linear-gradient(90deg, #C9A84C 0%, #9C89B8 100%);
+      width: 0%;
+      transition: width 0.5s ease;
+      border-radius: 3px;
+    }
+
+    .barra-texto {
+      font-size: 0.85rem;
+      color: #C9A84C;
+      font-weight: bold;
+      margin: 0;
+      animation: pulse 1s infinite;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .barra-completa {
+      color: #4CAF50 !important;
+      animation: none !important;
+    }
+
+    /* Confirmación anterior */
+    .confirmacion-anterior-box {
+      background: #E8F5E9;
+      border-left: 4px solid #4CAF50;
+      padding: 15px 20px;
+      border-radius: 6px;
+      margin-bottom: 20px;
+      text-align: left;
+      animation: slideDown 0.3s ease;
+    }
+
+    .confirmacion-badge {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: bold;
+      color: #2E7D32;
+      margin: 0 0 5px 0;
+    }
+
+    .confirmacion-fecha {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.9rem;
+      color: #388E3C;
+      margin: 0;
+    }
+
+    .mensaje-readonly {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.9rem;
+      color: #888;
+      font-style: italic;
+      margin: 10px 0;
+      padding: 10px;
+      background: #F5F5F5;
+      border-radius: 6px;
+    }
   </style>
 </head>
 <body>
@@ -1255,53 +1576,132 @@
 <!-- ══════════════════════════════════════════════════════
      SECTION 4 — RSVP / CONFIRMACIÓN
 ══════════════════════════════════════════════════════ -->
-<section id="rsvp" class="section">
+<section id="rsvp" class="rsvp-section">
+  <div class="rsvp-container">
 
-  <!-- Couple photo -->
-  <div class="rsvp-photo fi d1">
-    <img src="assets/images/pareja2.png" alt="Alejandra y Christian">
+    <!-- PANTALLA 1: VALIDAR CÓDIGO -->
+    <div id="pantalla-1" class="rsvp-pantalla activa">
+      <h2 class="rsvp-titulo">Confirma tu Asistencia</h2>
+      <p class="rsvp-subtitulo">Ingresa tu código de invitación</p>
+
+      <!-- Contador regresivo (CRÍTICO) -->
+      <div id="deadline-container" class="deadline-box">
+        <p id="countdown-text" class="countdown"></p>
+      </div>
+
+      <!-- Input código -->
+      <div class="input-group">
+        <input
+          type="text"
+          id="codigo-input"
+          class="codigo-input"
+          placeholder="A1B2C34"
+          maxlength="7"
+          autocomplete="off"
+        />
+      </div>
+
+      <!-- Botón validar -->
+      <button
+        id="validar-btn"
+        class="rsvp-btn btn-primario"
+        onclick="validarCodigo()"
+        disabled
+      >
+        Validar Código
+      </button>
+
+      <!-- Barra de progreso validación -->
+      <div id="barra-progreso-1" class="barra-progreso" style="display: none;">
+        <div class="barra-progreso-contenedor">
+          <div class="barra-relleno" id="barra-relleno-1"></div>
+        </div>
+        <p class="barra-texto" id="barra-texto-1">Validando formato...</p>
+      </div>
+
+      <!-- Mensaje error -->
+      <div id="error-mensaje-1" class="error-box" style="display: none;"></div>
+
+      <!-- Info helpful -->
+      <p class="rsvp-info">Si no tienes código, contacta a los novios por WhatsApp</p>
+    </div>
+
+    <!-- PANTALLA 2: CONFIRMAR CANTIDAD -->
+    <div id="pantalla-2" class="rsvp-pantalla">
+      <h2 class="rsvp-titulo">Familia <span id="familia-nombre"></span></h2>
+      <p class="rsvp-subtitulo">¿Cuántos invitados confirmas?</p>
+
+      <!-- Confirmación anterior (solo visible si ya confirmó) -->
+      <div id="confirmacion-anterior" class="confirmacion-anterior-box" style="display: none;">
+        <p class="confirmacion-badge">✓ Confirmación anterior detectada</p>
+        <p id="confirmacion-fecha" class="confirmacion-fecha"></p>
+      </div>
+
+      <!-- Display cantidad grande -->
+      <div class="cantidad-display">
+        <span id="cantidad-actual">1</span>
+        <small>invitado(s)</small>
+      </div>
+
+      <!-- Controles +/- -->
+      <div class="cantidad-controles">
+        <button
+          id="btn-menos"
+          class="btn-cantidad"
+          onclick="decrementarCantidad()"
+        >
+          −
+        </button>
+        <div class="cantidad-box">
+          <span id="cantidad-display">1</span>
+        </div>
+        <button
+          id="btn-mas"
+          class="btn-cantidad"
+          onclick="incrementarCantidad()"
+        >
+          +
+        </button>
+      </div>
+
+      <!-- Info máximo -->
+      <p class="cantidad-info" id="cantidad-info">Máximo permitido: 12 personas</p>
+
+      <!-- Mensaje read-only (solo visible si ya confirmó) -->
+      <p id="mensaje-readonly" class="mensaje-readonly" style="display: none;">
+        Tu asistencia ya fue confirmada. No puedes modificar la cantidad.
+      </p>
+
+      <!-- Botones acción -->
+      <div class="botones-grupo">
+        <button
+          id="confirmar-btn"
+          class="rsvp-btn btn-primario"
+          onclick="confirmarAsistencia()"
+        >
+          Confirmar Asistencia
+        </button>
+        <button
+          class="rsvp-btn btn-secundario"
+          onclick="volverPantalla1()"
+        >
+          ← Atrás
+        </button>
+      </div>
+
+      <!-- Barra de progreso confirmación -->
+      <div id="barra-progreso-2" class="barra-progreso" style="display: none;">
+        <div class="barra-progreso-contenedor">
+          <div class="barra-relleno" id="barra-relleno-2"></div>
+        </div>
+        <p class="barra-texto" id="barra-texto-2">Guardando confirmación...</p>
+      </div>
+
+      <!-- Mensaje error -->
+      <div id="error-mensaje-2" class="error-box" style="display: none;"></div>
+    </div>
+
   </div>
-
-  <p class="s-label fi d2">Tu presencia nos honra</p>
-  <h2 class="s-title fi d2">¿Nos acompañarás?</h2>
-
-  <div class="divider fi d3">
-    <span class="divider-inner">💌 &nbsp; ✦ &nbsp; 💌</span>
-  </div>
-
-  <p class="rsvp-sub fi d3">
-    Tu compañía hará este día aún más especial y lleno de amor.<br>
-    ¡Esperamos verte en nuestra boda!
-  </p>
-
-  <div class="deadline-box fi d4">
-    ⏰ &nbsp; Por favor <strong>confirma tu asistencia antes del 1 de noviembre de 2026</strong>.<br>
-    <span style="font-size:.78rem; color: var(--text-soft);">Cupo limitado · Necesitamos tu confirmación para organizar.</span>
-  </div>
-
-  <!-- WhatsApp CTA -->
-  <div class="fi d5">
-    <a
-      href="https://wa.me/5215519505027?text=%C2%A1Hola!%20Confirmo%20mi%20asistencia%20a%20la%20boda%20de%20Alejandra%20y%20Christian%20el%2018%20de%20diciembre%20de%202026%20%F0%9F%8E%8A"
-      class="wa-btn"
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label="Confirmar asistencia por WhatsApp">
-      <!-- WhatsApp icon -->
-      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <path d="M12.031 0C5.385 0 .004 5.38.004 12.027c0 2.12.553 4.112 1.518 5.843L.004 24l6.305-1.652a11.983 11.983 0 0 0 5.722 1.457h.003c6.646 0 12.024-5.38 12.024-12.028C24.058 5.378 18.678 0 12.031 0zm0 22.006a9.978 9.978 0 0 1-5.091-1.394l-.364-.216-3.765 1.0 1.009-3.674-.237-.377A9.98 9.98 0 0 1 2.05 12.027c0-5.51 4.472-9.982 9.981-9.982 5.51 0 9.981 4.471 9.981 9.982 0 5.51-4.47 9.98-9.981 9.98zm5.48-7.487c-.3-.15-1.77-.873-2.043-.973-.273-.1-.473-.15-.672.15-.2.3-.77.972-.944 1.172-.174.199-.348.224-.647.074-.3-.15-1.263-.466-2.406-1.484-.89-.793-1.49-1.772-1.664-2.07-.174-.3-.018-.461.13-.61.133-.134.3-.35.449-.525.15-.174.2-.299.3-.499.1-.2.05-.374-.025-.524-.075-.15-.672-1.623-.92-2.22-.244-.582-.49-.503-.672-.512-.174-.007-.374-.01-.573-.01-.2 0-.524.074-.797.373-.274.3-1.047 1.023-1.047 2.495 0 1.473 1.072 2.895 1.222 3.094.15.2 2.108 3.218 5.107 4.512.715.308 1.273.492 1.707.63.717.228 1.37.196 1.886.12.575-.085 1.772-.723 2.02-1.423.25-.7.25-1.298.175-1.423-.074-.125-.274-.2-.573-.35z"/>
-      </svg>
-      Confirmar Asistencia por WhatsApp
-    </a>
-  </div>
-
-  <!-- Asamimi RSVP dressed up -->
-  <div class="asa-rsvp fi d6">
-    <img src="assets/images/Asamimi_3.jpg" alt="Asamimi vestida de gala">
-    <p>¡Te esperamos con cariño! 💕</p>
-  </div>
-
-
 </section>
 
 
@@ -1325,6 +1725,11 @@
      SCRIPTS
 ══════════════════════════════════════════════════════ -->
 <script>
+// ===== CONFIGURACIÓN =====
+const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzbm0NbbHSGZxLtKRb5nDIlyVkyu58On5-PHKoMXP5GAvcdSabtGcETEuE34kQdOsLY/exec";
+const DEADLINE = new Date("2026-11-30T23:59:59").getTime();
+const WHATSAPP_NUMERO = "5519505027";
+
 /* ─── 1. PETAL PARTICLES ────────────────────────────────── */
 (function () {
   const canvas = document.getElementById('petalsCanvas');
@@ -1561,6 +1966,332 @@
 
   sections.forEach(s => io.observe(s));
 })();
+
+
+/* ─── RSVP SYSTEM ────────────────────────────────────── */
+
+// ── Barra de progreso ──────────────────────────────────
+function mostrarBarraProgreso(id, etapas) {
+  const barra    = document.getElementById(id);
+  const relleno  = document.getElementById(id.replace("barra-progreso", "barra-relleno"));
+  const texto    = document.getElementById(id.replace("barra-progreso", "barra-texto"));
+  if (!barra) return;
+
+  barra.style.display = "block";
+  relleno.style.width = "0%";
+  relleno.style.background = "linear-gradient(90deg, #C9A84C 0%, #9C89B8 100%)";
+  texto.style.color = "#C9A84C";
+  texto.classList.remove("barra-completa");
+
+  let acumulado = 0;
+  etapas.forEach(etapa => {
+    acumulado += (etapa.delay || 300);
+    setTimeout(() => {
+      if (barra.style.display !== "none") {
+        relleno.style.width = `${etapa.progreso}%`;
+        texto.textContent = etapa.texto;
+      }
+    }, acumulado);
+  });
+}
+
+function completarBarraProgreso(id, textoFinal) {
+  const relleno = document.getElementById(id.replace("barra-progreso", "barra-relleno"));
+  const texto   = document.getElementById(id.replace("barra-progreso", "barra-texto"));
+  if (relleno) relleno.style.width = "100%";
+  if (texto) { texto.textContent = textoFinal || "✓ Listo!"; texto.classList.add("barra-completa"); }
+}
+
+function errorBarraProgreso(id, textoError) {
+  const relleno = document.getElementById(id.replace("barra-progreso", "barra-relleno"));
+  const texto   = document.getElementById(id.replace("barra-progreso", "barra-texto"));
+  if (relleno) relleno.style.background = "#D32F2F";
+  if (texto) { texto.textContent = textoError || "Error"; texto.style.color = "#D32F2F"; texto.classList.remove("barra-completa"); }
+}
+
+function ocultarBarraProgreso(id) {
+  const barra = document.getElementById(id);
+  if (!barra) return;
+  barra.style.opacity = "0";
+  barra.style.transition = "opacity 0.5s ease";
+  setTimeout(() => {
+    barra.style.display = "none";
+    barra.style.opacity = "1";
+    barra.style.transition = "";
+    const relleno = document.getElementById(id.replace("barra-progreso", "barra-relleno"));
+    const texto   = document.getElementById(id.replace("barra-progreso", "barra-texto"));
+    if (relleno) { relleno.style.width = "0%"; relleno.style.background = ""; }
+    if (texto)   { texto.textContent = ""; texto.classList.remove("barra-completa"); texto.style.color = ""; }
+  }, 500);
+}
+
+// ── Helpers ────────────────────────────────────────────
+function formatearTimestamp(ts) {
+  if (!ts) return "";
+  try {
+    const meses = ["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
+    const d = new Date(ts);
+    return `${d.getDate()} de ${meses[d.getMonth()]}, ${String(d.getHours()).padStart(2,"0")}:${String(d.getMinutes()).padStart(2,"0")}`;
+  } catch(e) { return ts; }
+}
+
+function activarModoLectura(invitados, maximo, timestamp) {
+  actualizarDisplayCantidad(invitados, maximo);
+
+  document.getElementById("btn-menos").disabled = true;
+  document.getElementById("btn-mas").disabled   = true;
+  document.getElementById("confirmar-btn").disabled = true;
+
+  const confBox   = document.getElementById("confirmacion-anterior");
+  const confFecha = document.getElementById("confirmacion-fecha");
+  confBox.style.display = "block";
+  confFecha.textContent = timestamp ? `Confirmado el: ${formatearTimestamp(timestamp)}` : "";
+
+  document.getElementById("mensaje-readonly").style.display = "block";
+}
+
+function desactivarModoLectura() {
+  document.getElementById("confirmacion-anterior").style.display = "none";
+  document.getElementById("mensaje-readonly").style.display     = "none";
+  document.getElementById("confirmar-btn").disabled = false;
+}
+
+// ── Validar código (Pantalla 1 → 2) ───────────────────
+function validarCodigo() {
+  const codigo   = document.getElementById("codigo-input").value.toUpperCase().trim();
+  const errorBox = document.getElementById("error-mensaje-1");
+
+  errorBox.style.display = "none";
+
+  if (!validarFormatoCodigo(codigo)) {
+    mostrarError(errorBox, "Formato inválido. Usa: A1B2C34 (5 letras + 2 dígitos)");
+    return;
+  }
+
+  if (!validarDeadline()) {
+    mostrarError(errorBox, "La confirmación cerró el 30 de noviembre a las 23:59");
+    return;
+  }
+
+  const etapas = [
+    { progreso: 30, texto: "Conectando con servidor...",          delay: 300 },
+    { progreso: 60, texto: "Buscando código en base de datos...", delay: 500 },
+    { progreso: 90, texto: "Verificando datos...",                delay: 500 }
+  ];
+  mostrarBarraProgreso("barra-progreso-1", etapas);
+  document.getElementById("validar-btn").disabled = true;
+
+  fetch(`${APPS_SCRIPT_URL}?action=validar&codigo=${codigo}`)
+    .then(r => r.json())
+    .then(data => {
+      if (data.valido) {
+        completarBarraProgreso("barra-progreso-1", "✓ Listo!");
+
+        sessionStorage.setItem("codigo",         codigo);
+        sessionStorage.setItem("familia",        data.familia);
+        sessionStorage.setItem("invitados_max",  data.maximo);
+
+        document.getElementById("familia-nombre").textContent = data.familia;
+
+        if (data.estado === "Confirmado") {
+          const invitados = data.invitados || 1;
+          sessionStorage.setItem("invitados_actual", invitados);
+          activarModoLectura(invitados, data.maximo, data.timestamp);
+        } else {
+          sessionStorage.setItem("invitados_actual", 1);
+          desactivarModoLectura();
+          actualizarDisplayCantidad(1, data.maximo);
+        }
+
+        setTimeout(() => {
+          ocultarBarraProgreso("barra-progreso-1");
+          cambiarPantalla(1, 2);
+        }, 1000);
+
+      } else {
+        errorBarraProgreso("barra-progreso-1", "Código no encontrado");
+        setTimeout(() => ocultarBarraProgreso("barra-progreso-1"), 1500);
+        mostrarError(errorBox, "Código no encontrado. Verifica que sea correcto.");
+        document.getElementById("validar-btn").disabled = false;
+      }
+    })
+    .catch(err => {
+      errorBarraProgreso("barra-progreso-1", "Error de conexión");
+      setTimeout(() => ocultarBarraProgreso("barra-progreso-1"), 1500);
+      mostrarError(errorBox, "Error de conexión. Intenta de nuevo.");
+      document.getElementById("validar-btn").disabled = false;
+      console.error(err);
+    });
+}
+
+// ── Cantidad +/- ───────────────────────────────────────
+function incrementarCantidad() {
+  let cantidad   = parseInt(sessionStorage.getItem("invitados_actual"));
+  const maximo   = parseInt(sessionStorage.getItem("invitados_max"));
+  if (cantidad < maximo) {
+    cantidad++;
+    sessionStorage.setItem("invitados_actual", cantidad);
+    actualizarDisplayCantidad(cantidad, maximo);
+  }
+}
+
+function decrementarCantidad() {
+  let cantidad = parseInt(sessionStorage.getItem("invitados_actual"));
+  if (cantidad > 1) {
+    cantidad--;
+    sessionStorage.setItem("invitados_actual", cantidad);
+    actualizarDisplayCantidad(cantidad, parseInt(sessionStorage.getItem("invitados_max")));
+  }
+}
+
+function actualizarDisplayCantidad(cantidad, maximo) {
+  document.getElementById("cantidad-actual").textContent  = cantidad;
+  document.getElementById("cantidad-display").textContent = cantidad;
+  document.getElementById("btn-menos").disabled = cantidad <= 1;
+  document.getElementById("btn-mas").disabled   = cantidad >= maximo;
+  document.getElementById("cantidad-info").textContent = `Máximo permitido: ${maximo} personas`;
+}
+
+// ── Confirmar asistencia (Pantalla 2) ─────────────────
+function confirmarAsistencia() {
+  const codigo   = sessionStorage.getItem("codigo");
+  const familia  = sessionStorage.getItem("familia");
+  const cantidad = parseInt(sessionStorage.getItem("invitados_actual"));
+  const errorBox = document.getElementById("error-mensaje-2");
+
+  errorBox.style.display = "none";
+
+  if (!validarDeadline()) {
+    mostrarError(errorBox, "La confirmación cerró el 30 de noviembre a las 23:59");
+    return;
+  }
+
+  if (cantidad < 1 || cantidad > 12) {
+    mostrarError(errorBox, "Cantidad inválida (1-12)");
+    return;
+  }
+
+  const etapas = [
+    { progreso: 30, texto: "Guardando confirmación...",      delay: 300 },
+    { progreso: 60, texto: "Actualizando base de datos...",  delay: 500 },
+    { progreso: 90, texto: "Enviando a WhatsApp...",         delay: 500 }
+  ];
+  mostrarBarraProgreso("barra-progreso-2", etapas);
+  document.getElementById("confirmar-btn").disabled = true;
+
+  fetch(`${APPS_SCRIPT_URL}?action=confirmar&codigo=${codigo}&cantidad=${cantidad}`, {
+    method: "POST"
+  })
+    .then(r => r.json())
+    .then(data => {
+      if (data.success) {
+        completarBarraProgreso("barra-progreso-2", "✓ Confirmado!");
+        const mensaje = generarMensajeWhatsApp(familia, cantidad, codigo);
+        mostrarExito(cantidad, familia);
+        setTimeout(() => { window.location.href = mensaje; }, 2000);
+        setTimeout(() => {
+          ocultarBarraProgreso("barra-progreso-2");
+          sessionStorage.clear();
+          cambiarPantalla(2, 1);
+          document.getElementById("codigo-input").value = "";
+          document.getElementById("validar-btn").disabled = true;
+        }, 3000);
+      } else {
+        errorBarraProgreso("barra-progreso-2", "Error al confirmar");
+        setTimeout(() => ocultarBarraProgreso("barra-progreso-2"), 1500);
+        mostrarError(errorBox, data.error || "Error al confirmar. Intenta de nuevo.");
+        document.getElementById("confirmar-btn").disabled = false;
+      }
+    })
+    .catch(err => {
+      errorBarraProgreso("barra-progreso-2", "Error de conexión");
+      setTimeout(() => ocultarBarraProgreso("barra-progreso-2"), 1500);
+      mostrarError(errorBox, "Error de conexión. Intenta de nuevo.");
+      document.getElementById("confirmar-btn").disabled = false;
+      console.error(err);
+    });
+}
+
+// ── Helpers ────────────────────────────────────────────
+function generarMensajeWhatsApp(familia, cantidad, codigo) {
+  const msg = `Hola! Confirmamos nuestra asistencia para ${cantidad} persona${cantidad > 1 ? 's' : ''} de la familia ${familia}. Código: ${codigo}. ¡Nos vemos el 18 de diciembre! 🎉`;
+  return `https://wa.me/${WHATSAPP_NUMERO}?text=${encodeURIComponent(msg)}`;
+}
+
+function validarFormatoCodigo(codigo) {
+  return /^[A-Z0-9]{7}$/.test(codigo);
+}
+
+function validarDeadline() {
+  return new Date().getTime() < DEADLINE;
+}
+
+function cambiarPantalla(de, a) {
+  document.getElementById(`pantalla-${de}`).classList.remove("activa");
+  document.getElementById(`pantalla-${a}`).classList.add("activa");
+}
+
+function volverPantalla1() {
+  desactivarModoLectura();
+  document.getElementById("btn-menos").disabled = false;
+  document.getElementById("btn-mas").disabled   = false;
+  ocultarBarraProgreso("barra-progreso-1");
+  ocultarBarraProgreso("barra-progreso-2");
+  cambiarPantalla(2, 1);
+  sessionStorage.clear();
+  document.getElementById("codigo-input").value = "";
+}
+
+function mostrarError(elemento, mensaje) {
+  elemento.textContent = mensaje;
+  elemento.style.display = "block";
+  elemento.scrollIntoView({ behavior: "smooth", block: "center" });
+}
+
+function mostrarExito(cantidad, familia) {
+  alert(`✓ Confirmado! Familia ${familia} con ${cantidad} invitado(s)\n\nRedirigiendo a WhatsApp...`);
+}
+
+// ── Countdown deadline ────────────────────────────────
+function actualizarCountdown() {
+  const tiempoRestante = DEADLINE - new Date().getTime();
+  const el = document.getElementById("countdown-text");
+  if (!el) return;
+
+  if (tiempoRestante <= 0) {
+    el.textContent = "Confirmación cerrada";
+    el.classList.add("urgente");
+    const btn = document.getElementById("validar-btn");
+    if (btn) btn.disabled = true;
+    return;
+  }
+
+  const dias    = Math.floor(tiempoRestante / (1000 * 60 * 60 * 24));
+  const horas   = Math.floor((tiempoRestante % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutos = Math.floor((tiempoRestante % (1000 * 60 * 60)) / (1000 * 60));
+
+  el.textContent = `Confirma antes del 30 de noviembre: ${dias}d ${horas}h ${minutos}m`;
+  if (dias < 3) el.classList.add("urgente");
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+  const codigoInput = document.getElementById("codigo-input");
+  const validarBtn  = document.getElementById("validar-btn");
+
+  if (codigoInput) {
+    codigoInput.addEventListener("input", function(e) {
+      e.target.value = e.target.value.toUpperCase();
+      validarBtn.disabled = !validarFormatoCodigo(e.target.value);
+    });
+
+    codigoInput.addEventListener("keypress", function(e) {
+      if (e.key === "Enter" && !validarBtn.disabled) validarCodigo();
+    });
+  }
+
+  actualizarCountdown();
+  setInterval(actualizarCountdown, 1000);
+});
 </script>
 
 </body>
