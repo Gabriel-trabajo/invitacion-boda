@@ -2069,7 +2069,7 @@ function validarCodigo() {
   }
 
   if (!validarDeadline()) {
-    mostrarError(errorBox, "La confirmación cerró el 30 de noviembre a las 23:59");
+    mostrarError(errorBox, "La confirmación cerró el 1 de noviembre a las 23:59");
     return;
   }
 
@@ -2162,7 +2162,7 @@ function confirmarAsistencia() {
   errorBox.style.display = "none";
 
   if (!validarDeadline()) {
-    mostrarError(errorBox, "La confirmación cerró el 30 de noviembre a las 23:59");
+    mostrarError(errorBox, "La confirmación cerró el 1 de noviembre a las 23:59");
     return;
   }
 
@@ -2270,7 +2270,7 @@ function actualizarCountdown() {
   const horas   = Math.floor((tiempoRestante % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
   const minutos = Math.floor((tiempoRestante % (1000 * 60 * 60)) / (1000 * 60));
 
-  el.textContent = `Confirma antes del 30 de noviembre: ${dias}d ${horas}h ${minutos}m`;
+  el.textContent = `Confirma antes del 1 de noviembre: ${dias}d ${horas}h ${minutos}m`;
   if (dias < 3) el.classList.add("urgente");
 }
 
